@@ -1,0 +1,30 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+namespace: crowsnest
+
+resources:
+  - crowsnest-namespace.yaml
+  - crowsnest-scc.yaml
+  - crowsnest-serviceaccount.yaml
+  - crowsnest-role.yaml
+  - crowsnest-rolebinding.yaml
+#  - crowsnest-configmap.yaml
+  - crowsnest-daemonset.yaml
+
+  # Amend kubelet.conf using MachineConfig
+  - crowsnest-kubeletconfig.yaml
+
+configMapGenerator:
+  - name: crowsnest-config
+    files:
+      - files/crowsnest_config.conf
+  - name: crowsnest-shutdowncmd
+    files:
+      - files/crowsnest_shutdown.sh
+  - name: crowsnest-notifycmd
+    files:
+      - files/crowsnest_notifycmd.sh

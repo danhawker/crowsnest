@@ -1,0 +1,28 @@
+variant: openshift
+version: 4.18.0
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: master
+  name: 99-crowsnest
+storage:
+  files:
+    - path: /etc/kubernetes/manifests/crowsnest-pod.yaml
+      overwrite: true
+      mode: 0644
+      contents:
+        local: crowsnest-static-pod.yaml
+    - path: /usr/local/etc/crowsnest_config.conf
+      overwrite: true
+      mode: 0640
+      contents:
+        local: crowsnest_config.conf
+    - path: /usr/local/bin/crowsnest_shutdown.sh
+      overwrite: true
+      mode: 0500
+      contents:
+        local: crowsnest_shutdown.sh
+    - path: /usr/local/bin/crowsnest_notifycmd.sh
+      overwrite: true
+      mode: 0500
+      contents:
+        local: crowsnest_notifycmd.sh

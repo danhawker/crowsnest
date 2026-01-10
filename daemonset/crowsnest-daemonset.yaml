@@ -1,0 +1,72 @@
+kind: DaemonSet
+apiVersion: apps/v1
+metadata:
+  name: crowsnest
+  labels: 
+    app.kubernetes.io/name: crowsnest
+    app.kubernetes.io/part-of: crowsnest
+spec:
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: crowsnest
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: crowsnest
+        app.kubernetes.io/part-of: crowsnest
+    spec:
+      volumes:
+        - name: config
+          configMap:
+            name: crowsnest-config
+        - name: shutdowncmd
+          configMap:
+            name: crowsnest-shutdowncmd
+            defaultMode: 0555
+        - name: notifycmd
+          configMap:
+            name: crowsnest-notifycmd
+            defaultMode: 0555
+        - name: host
+          hostPath:
+            path: /
+            type: Directory
+      serviceAccountName: crowsnest
+      securityContext: {}
+      priorityClassName: system-node-critical
+      containers:
+        - name: crowsnest
+          image: quay.io/danhawker/crowsnest:root
+          imagePullPolicy: Always
+          securityContext:
+            privileged: true
+            runAsUser: 0
+            capabilities:
+              add:
+              - SYS_BOOT
+              - SYS_CHROOT
+              - SYS_ADMIN
+              - MKNOD
+          volumeMounts:
+            - name: config
+              mountPath: /etc/nut/upsmon.conf
+            - name: shutdowncmd
+              mountPath: /bin/crowsnest_shutdown.sh
+            - name: notifycmd
+              mountPath: /bin/crowsnest_notifycmd.sh
+            - name: host
+              mountPath: /host
+          resources:
+            requests:
+              cpu: 50m
+              memory: 16Mi
+            #limits:
+            #  cpu: 500m
+            #  memory: 128Mi
+      nodeSelector:
+        kubernetes.io/os: linux
+

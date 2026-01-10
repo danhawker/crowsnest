@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: crowsnest
+  labels:
+    openshift.io/cluster-monitoring: "true"
+    app.kubernetes.io/part-of: crowsnest
+  annotations:
+    openshift.io/display-name: 'CrowsNest'
+    openshift.io/description: "CrowsNest UPS Monitoring"
+    openshift.io/node-selector: ''

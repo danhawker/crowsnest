@@ -1,0 +1,12 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: KubeletConfig
+metadata:
+  name: set-gracefulnodeshutdown
+spec:
+  machineConfigPoolSelector:
+    matchLabels:
+      pools.operator.machineconfiguration.openshift.io/master: ''
+      #machineconfiguration.openshift.io/role: master
+  kubeletConfig:
+    shutdownGracePeriod: 60s
+    shutdownGracePeriodCriticalPods: 20s

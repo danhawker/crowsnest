@@ -1,0 +1,14 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: crowsnest-scc-rolebinding
+  namespace: crowsnest
+subjects:
+- kind: ServiceAccount
+  name: crowsnest
+  namespace: crowsnest
+roleRef:
+  kind: Role
+  name: crowsnest-role
+  namespace: crowsnest
+  apiGroup: rbac.authorization.k8s.io

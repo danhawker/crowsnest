@@ -1,0 +1,9 @@
+[admin]
+    password = adminpass
+    actions = SET
+    actions = FSD
+    instcmds = ALL
+
+[remoteuser]
+    password = remotepass
+    upsmon slave

@@ -1,0 +1,31 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: crowsnest-config
+  labels:
+    app.kubernetes.io/name: crowsnest
+    app.kubernetes.io/part-of: crowsnest
+data:
+  upsmon.conf: |
+
+    # Define which UPS to monitor 
+    MONITOR apc-dummy@eirene.pv.lan 1 pvqremote remote slave
+
+    # Set Common Config Options
+    MINSUPPLIES 1
+    POLLFREQ 5
+    POLLFREQALERT 5
+    HOSTSYNC 15
+    DEADTIME 15
+    POWERDOWNFLAG /etc/nut/killpower
+    # Which User to run as
+    RUN_AS_USER root
+    # Define Shutdown command
+    #SHUTDOWNCMD "echo 'Shutting down from container!'"
+    SHUTDOWNCMD "/bin/crowsnest_shutdown.sh"
+    # Setup special ONBATT, LOWBATT and ONLINE NOTIFY attributes
+    NOTIFYFLAG ONBATT SYSLOG+WALL+EXEC
+    NOTIFYFLAG ONLINE SYSLOG+WALL+EXEC
+    NOTIFYFLAG LOWBATT SYSLOG+WALL+EXEC
+    # Define NOTIFYCMD
+    NOTIFYCMD "/bin/crowsnest_notifycmd.sh"

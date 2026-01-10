@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: crowsnest
+  namespace: crowsnest
+  labels:
+    name: crowsnest
+    app.kubernetes.io/name: crowsnest
+    app.kubernetes.io/part-of: crowsnest
+spec:
+  priorityClassName: system-node-critical
+  containers:
+    - name: crowsnest
+      image: quay.io/danhawker/crowsnest:root
+      securityContext:
+        privileged: true
+        runAsUser: 0
+        capabilities:
+          add:
+          - CAP_SYS_BOOT
+          - SYS_CHROOT
+          - SYS_ADMIN
+          - MKNOD
+      volumeMounts:
+        - name: config
+          mountPath: /etc/nut/upsmon.conf
+        - name: notifycmd
+          mountPath: /bin/crowsnest_notifycmd.sh
+        - name: shutdowncmd
+          mountPath: /bin/crowsnest_shutdown.sh
+        - name: host
+          mountPath: /host
+      resources:
+        requests:
+          cpu: 50m
+          memory: 16Mi
+        limits:
+          cpu: 100m
+          memory: 32Mi
+  volumes:
+    - name: config
+      hostPath:
+        path: /usr/local/etc/crowsnest_config.conf
+        type: ''
+        defaultMode: 0640
+    - name: shutdowncmd
+      hostPath:
+        path: /usr/local/bin/crowsnest_shutdown.sh
+        type: ''
+        defaultMode: 0500
+    - name: notifycmd
+      hostPath:
+        path: /usr/local/bin/crowsnest_notifycmd.sh
+        type: ''
+        defaultMode: 0500
+    - name: host
+      hostPath:
+        path: /
+        type: Directory

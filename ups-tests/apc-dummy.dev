@@ -1,0 +1,47 @@
+# Dummy APC UPS Definition for dummy driver
+battery.charge: 100
+battery.charge.low: 10
+battery.charge.warning: 50
+battery.date: not set
+battery.mfr.date: 2025/09/03
+battery.runtime: 600
+battery.runtime.low: 100
+battery.type: PbAc
+battery.voltage: 13.6
+battery.voltage.nominal: 12.0
+device.mfr: APC
+device.model: Back-UPS Dummy
+device.serial: 1234567890a
+device.type: ups
+driver.debug: 0
+driver.flag.allow_killpower: 0
+driver.name: usbhid-ups
+driver.parameter.pollfreq: 30
+driver.parameter.pollinterval: 2
+driver.parameter.port: auto
+driver.parameter.serial: 1234567890a
+driver.parameter.synchronous: auto
+driver.state: quiet
+driver.version: 2.8.2
+driver.version.data: APC HID 0.100
+driver.version.internal: 0.53
+driver.version.usb: libusb-1.0.23 (API: 0x1000107)
+input.sensitivity: medium
+input.transfer.high: 266
+input.transfer.low: 180
+input.voltage: 240.0
+input.voltage.nominal: 230
+ups.beeper.status: enabled
+ups.delay.shutdown: 20
+ups.firmware: 871.O3 .I
+ups.firmware.aux: O3
+ups.load: 16
+ups.mfr: APC
+ups.mfr.date: 2025/09/03
+ups.model: Back-UPS Dummy
+ups.productid: 0002
+ups.serial: 1234567890a
+ups.status: OL
+ups.timer.reboot: 0
+ups.timer.shutdown: -1
+ups.vendorid: 051d
