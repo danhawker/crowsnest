@@ -9,7 +9,7 @@ data:
   upsmon.conf: |
 
     # Define which UPS to monitor 
-    MONITOR apc-dummy@eirene.pv.lan 1 pvqremote remote slave
+    MONITOR apc-dummy@example.com 1 remoteuser remotepass slave
 
     # Set Common Config Options
     MINSUPPLIES 1
