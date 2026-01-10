@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-# crowsnest
-Automated OpenShift Node Power Event Monitoring and Shutdown, using NUT UPS events and k8s GradefulNodeShutdown features.
 =======
 # CrowsNest
-
 Automated OpenShift Node Power Event Monitoring and Shutdown, using NUT UPS events and k8s GradefulNodeShutdown features.
 
 CrowsNest monitors remote NUT servers for power events and acts accordingly, alerting and/or powering down OpenShift nodes based on the criticality of events raised.
@@ -104,4 +100,6 @@ However, it is worth verifying and tuning the various grace periods and drain ti
 ## Testing Power Events
 
 See [TESTING.md](ups-tests/TESTING.md)
->>>>>>> 9ca71b7 (Initial commit)
+
+
+
