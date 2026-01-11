@@ -14,7 +14,7 @@ Be aware that most UPSes have a built in delay variable (`ups.delay.shutdown`) t
  
 ### Setup NUT
 
-This guide assumes you have a NUT server setup and configured. If you don't, head over to https://networkupstools.org/ and get one setup. NUT has very low resource needs, and low end SMCs like the Raspberry Pi Zero are perfectly sufficient. 
+This guide assumes you have a NUT server setup and configured. If you don't, head over to https://networkupstools.org/ and get one setup. NUT has very low resource needs, and low end SBCs like the Raspberry Pi Zero are perfectly sufficient. 
 
 Once up and running, add a dummy UPS. I won't detail how here, but a set of known working NUT config files for a dummy UPS are included in `ups-tests` which can be merged with your existing setup.
 
@@ -27,7 +27,7 @@ Once up and running, add a dummy UPS. I won't detail how here, but a set of know
 
 To raise a power event, use `upsrw` to directly edit the dummy UPS variables, and raise UPS flags. Crowsnest will then depending upon the criticality of the flag, simply log the event, or initiate host shutdown.
 
-### Transition states
+### Transition States
 
 Set the dummy UPS to be ONLINE (ups.status=OL)
 
